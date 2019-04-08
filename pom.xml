@@ -6,7 +6,7 @@
 
     <groupId>com.github.kayr</groupId>
     <artifactId>jboomerang-jpa-tx</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
 
     <name>j-boomerang</name>
     <!-- FIXME change it to the project's website -->
@@ -22,7 +22,7 @@
         <dependency>
             <groupId>com.github.kayr</groupId>
             <artifactId>jboomerang</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>0.1</version>
         </dependency>
         <dependency>
             <groupId>javax.persistence</groupId>
@@ -47,6 +47,13 @@
             <version>1.7.25</version>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io/</url>
+        </repository>
+    </repositories>
 
     <build>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
