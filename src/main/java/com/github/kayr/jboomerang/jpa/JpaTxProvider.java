@@ -17,17 +17,17 @@ import java.util.concurrent.Callable;
  * rollback the transaction if an error occurs.
  * <p>
  */
-public class TxManager implements JBoomerang.ResourceFactory<TxHolder> {
+public class JpaTxProvider implements JBoomerang.ResourceFactory<TxHolder> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(TxManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JpaTxProvider.class);
 
     private final JBoomerang<TxHolder> txResource = new JBoomerang<>(this);
 
 
-    private JpaResourceMgr jpaResourceMgr;
+    private EntityManagerProvider entityManagerProvider;
 
-    public TxManager(JpaResourceMgr jpaResourceMgr) {
-        this.jpaResourceMgr = jpaResourceMgr;
+    public JpaTxProvider(EntityManagerProvider entityManagerProvider) {
+        this.entityManagerProvider = entityManagerProvider;
     }
 
 
@@ -60,7 +60,7 @@ public class TxManager implements JBoomerang.ResourceFactory<TxHolder> {
 
     public <V> Optional<V> doInTX(Object discriminator, JBoomerang.Propagation propagation, JBoomerangFunction<TxHolder, V> fx) {
         Objects.requireNonNull(discriminator, "tenant id cannot be null");
-        return jpaResourceMgr.doInJpa(discriminator, propagation, em -> txResource.withResource(discriminator, propagation, JBoomerang.Args.of(em), fx));
+        return entityManagerProvider.doInJpa(discriminator, propagation, em -> txResource.withResource(discriminator, propagation, JBoomerang.Args.of(em), fx));
 
 
     }
@@ -91,7 +91,7 @@ public class TxManager implements JBoomerang.ResourceFactory<TxHolder> {
 
     private void commit(Object discriminator, EntityTransaction tx) {
         try {
-            LOG.debug("[TxManager]Committing transactions");
+            LOG.debug("[TxManager]Committing transactions: {}",discriminator);
             tx.commit();
         } catch (Exception x) {
             throw new BoomerangCloseException("Error committing transaction", x, this);

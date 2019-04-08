@@ -2,30 +2,22 @@ package com.github.kayr.jboomerang.jpa;
 
 import com.github.kayr.jboomerang.JBoomerang;
 import com.github.kayr.jboomerang.JBoomerangFunction;
-import org.hibernate.Session;
-import org.hibernate.internal.SessionImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
-import java.sql.Connection;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-public class JpaResourceMgr implements JBoomerang.ResourceFactory<EntityManager> {
+public class EntityManagerProvider implements JBoomerang.ResourceFactory<EntityManager> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(JpaResourceMgr.class);
+    private static final Logger LOG = LoggerFactory.getLogger(EntityManagerProvider.class);
     private Supplier<EntityManagerFactory> entityManagerFactory;
     private JBoomerang<EntityManager> jpaResource = new JBoomerang<>(this);
 
-
-    public static Connection extractConnection(EntityManager em) {
-        SessionImpl unwrap = (SessionImpl) em.unwrap(Session.class);
-        return unwrap.connection();
-    }
 
     public <V> Optional<V> doInJpa(Object tenantId, JBoomerang.Propagation propagation, JBoomerangFunction<EntityManager, V> fx) {
 
@@ -83,7 +75,7 @@ public class JpaResourceMgr implements JBoomerang.ResourceFactory<EntityManager>
         return "JPAResource:" + jpaResource.getCurrentResource().orElse(null);
     }
 
-    public JpaResourceMgr setEntityManagerFactory(Supplier<EntityManagerFactory> entityManagerFactory) {
+    public EntityManagerProvider setEntityManagerFactoryProvider(Supplier<EntityManagerFactory> entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
         return this;
     }
