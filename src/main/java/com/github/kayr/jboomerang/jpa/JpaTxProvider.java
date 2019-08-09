@@ -57,6 +57,16 @@ public class JpaTxProvider implements JBoomerang.ResourceFactory<TxHolder> {
         return doInTX(txResource.currentDiscriminatorOrCommon(), propagation, th -> fx.call());
     }
 
+    public TxHolder current() {
+        return txResource.getCurrentResource().orElseThrow(() -> new IllegalStateException("no current open transaction for : " + txResource.currentDiscriminator()));
+    }
+
+    public TxHolder current(Object discriminator) {
+        return txResource.getCurrentResource(discriminator)
+                         .orElseThrow(() -> new IllegalStateException("no current open transaction for : " + discriminator));
+    }
+
+
 
     public <V> Optional<V> doInTX(Object discriminator, JBoomerang.Propagation propagation, JBoomerangFunction<TxHolder, V> fx) {
         Objects.requireNonNull(discriminator, "tenant id cannot be null");
