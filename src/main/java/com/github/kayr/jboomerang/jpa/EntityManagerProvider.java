@@ -72,7 +72,7 @@ public class EntityManagerProvider implements JBoomerang.ResourceFactory<EntityM
 
     @Override
     public String toString() {
-        return "JPAResource:" + jpaResource.getCurrentResource().orElse(null);
+        return "JPAResource:" + jpaResource.currentDiscriminator().orElse(null);
     }
 
     public EntityManagerProvider setEntityManagerFactoryProvider(Supplier<EntityManagerFactory> entityManagerFactory) {
