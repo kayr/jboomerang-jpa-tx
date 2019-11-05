@@ -8,7 +8,7 @@
     <artifactId>jboomerang-jpa-tx</artifactId>
     <version>0.2-SNANPSHOT</version>
 
-    <name>j-boomerang</name>
+    <name>j-boomerang-jpa</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -22,7 +22,7 @@
         <dependency>
             <groupId>com.github.kayr</groupId>
             <artifactId>jboomerang</artifactId>
-            <version>0.3</version>
+            <version>0.4</version>
         </dependency>
         <dependency>
             <groupId>javax.persistence</groupId>
