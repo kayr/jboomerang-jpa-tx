@@ -6,7 +6,7 @@
 
     <groupId>io.github.kayr</groupId>
     <artifactId>jboomerang-jpa-tx</artifactId>
-    <version>0.6-SNANPSHOT</version>
+    <version>0.6-SNAPSHOT</version>
 
     <name>j-boomerang-jpa</name>
     <url>https://github.com/kayr/jboomerang-jpa-tx</url>
