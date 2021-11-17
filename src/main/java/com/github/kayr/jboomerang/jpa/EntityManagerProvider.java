@@ -5,9 +5,9 @@ import com.github.kayr.jboomerang.JBoomerangFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.NoResultException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;

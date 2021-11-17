@@ -1,7 +1,7 @@
 package com.github.kayr.jboomerang.jpa;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 
 public class TxHolder {
     private EntityManager em;
